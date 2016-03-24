@@ -1,0 +1,17 @@
+{
+  "name": "kappa_factories",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "author": "Scott Bromander",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.2",
+    "angular-route": "^1.5.2",
+    "express": "^4.13.4"
+  }
+}
