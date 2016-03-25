@@ -15,30 +15,32 @@ myApp.config(["$routeProvider", function($routeProvider){
         });
 }]);
 
-myApp.controller("HomeController", ["$scope", function($scope){
-    console.log($scope.somethingAwesome);
-    $scope.somethingAwesome = "AWESOME THING!";
-    console.log($scope.somethingAwesome);
+myApp.controller("HomeController", ["$scope", "CatService", function($scope, CatService){
+    CatService.getData();
+    $scope.data = CatService.personData;
 }]);
 
-myApp.controller("CatController", ["$scope", "CatService", function($scope, CatService){
-    CatService.shoutSomeCats();
-    $scope.anything = CatService.cats;
+myApp.controller("CatController", ["$scope", function($scope){
 
-    console.log($scope.somethingAwesome);
 }]);
 
 myApp.factory("CatService", ["$http", function($http){
-    var someCats = "No Voodoo";
-    var catShoutIndex = 0;
-    var shoutyCats = function(){
-        catShoutIndex++;
-        console.log("SO MANY CATS! ", catShoutIndex);
+    var makeCall = function(){
+      if(data.results === undefined){
+        console.log("GET EXECUTED");
+        $http.get("/data").then(function(response){
+            console.log(response);
+            data.results = response.data;
+            console.log(data);
+        });
+      }
     };
 
+
+    var data = {};
+
     return {
-        //public
-        cats : someCats,
-        shoutSomeCats : shoutyCats
+        getData : makeCall,
+        personData : data
     };
 }]);
